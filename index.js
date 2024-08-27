@@ -9,7 +9,7 @@ $(document).ready(function () {
     let $music = document.getElementById('bgMusic');
     let timer;
     let speedUp;
-    score = 0;
+    let score = 0;
     score_add = 1.1;
     //固定初始音量
     $music.currentTime = 0;
@@ -25,7 +25,7 @@ $(document).ready(function () {
             $('#play1').css('left', x - 100 + "px")
         }
     }
-    $('body').click(left_click);
+    // $('body').click(left_click);
     //右鍵
     function right_click(e) {
         e.preventDefault()
@@ -33,19 +33,19 @@ $(document).ready(function () {
         if (x < 210)
             $('#play1').css('left', x + 100 + "px")
     }
-    $('body').contextmenu(right_click);
+    // $('body').contextmenu(right_click);
 
     //鍵盤事件
-    // $(document).keydown(function(e){
-    //     switch (e.key) {
-    //         case 'ArrowLeft':
-    //             left_click()
-    //             break;
-    //         case 'ArrowRight':
-    //             right_click(e)
-    //             break;
-    //     }
-    // })
+    $(document).keydown(function(e){
+        switch (e.key) {
+            case 'ArrowLeft':
+                left_click()
+                break;
+            case 'ArrowRight':
+                right_click(e)
+                break;
+        }
+    })
 
     //障礙物生成
     function createObstacle() {
@@ -64,8 +64,9 @@ $(document).ready(function () {
     //遊戲結束
     function gameover(e) {
         //角色禁止移動
-        $('body').unbind('click');
-        $('body').unbind('contextmenu');
+        // $('body').unbind('click');
+        // $('body').unbind('contextmenu');
+        $(document).off('keydown');
         //清除計時器
         clearInterval(timer);
         clearInterval(speedUp);
@@ -86,7 +87,7 @@ $(document).ready(function () {
             'font-size': '36px'
         })
         $('#end').click(function () {
-            $('#end').unbind('click');
+            // $('#end').unbind('click');
             //清除提示頁面
             $('#end').remove();
             //清空敵人
@@ -113,18 +114,18 @@ $(document).ready(function () {
         timer = setInterval(timer_func, 1000 / 60);
         speedUp = setInterval(speedUp_func, 1000)
         //角色移動
-        $('body').off('click').on('click',left_click);
-        $('body').off('contextmenu').on('contextmenu',right_click);
-        // $(document).off('keydown').keydown(function(e){
-        //     switch (e.key) {
-        //         case 'ArrowLeft':
-        //             left_click()
-        //             break;
-        //         case 'ArrowRight':
-        //             right_click(e)
-        //             break;
-        //     }
-        // })
+        // $('body').off('click').on('click',left_click);
+        // $('body').off('contextmenu').on('contextmenu',right_click);
+        $(document).off('keydown').keydown(function(e){
+            switch (e.key) {
+                case 'ArrowLeft':
+                    left_click()
+                    break;
+                case 'ArrowRight':
+                    right_click(e)
+                    break;
+            }
+        })
     }
     restart();
 
