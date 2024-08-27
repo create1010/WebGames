@@ -26,9 +26,6 @@ body {
 }
 
 .play1 {
-    /* border: 5px solid rgb(0, 17, 255);
-    border-top: none;
-    border-radius: 20%; */
     background: url(/img/user.png);
     background-position: center;
     background-repeat: no-repeat;

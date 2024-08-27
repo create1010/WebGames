@@ -12,7 +12,11 @@ $(document).ready(function () {
     score = 0;
     score_add = 1.1;
     //固定初始音量
-    $music.volume = 0.1;
+    $music.currentTime = 0;
+    $music.volume = 0.2;
+    $body.one('click',function(){
+        $music.play();
+    })
 
     //左鍵
     function left_click() {
@@ -30,6 +34,19 @@ $(document).ready(function () {
             $('#play1').css('left', x + 100 + "px")
     }
     $('body').contextmenu(right_click);
+
+    //鍵盤事件
+    $(document).keydown(function(e){
+        switch (e.key) {
+            case 'ArrowLeft':
+                left_click()
+                break;
+            case 'ArrowRight':
+                right_click(e)
+                break;
+        }
+    })
+
     //障礙物生成
     function createObstacle() {
         let Location = [10, 110, 210];
@@ -54,7 +71,7 @@ $(document).ready(function () {
         clearInterval(speedUp);
         $music.pause();
         $music.currentTime = 0;
-        $music.volume = 0.1;
+        // $music.volume = 0.1;
         $('.stage').append("<div id='end'>遊戲結束</div>");
         $('#end').css({
             'background': "black",
@@ -83,10 +100,10 @@ $(document).ready(function () {
         level = 0;
         score = 0;
         score_add = 1.1
-        //初始化音樂
-        $body.click(function () {
-            $music.play();
-        });
+
+        //初始音樂
+        $music.currentTime = 0; // 從頭開始播放音樂
+        $music.play();
 
         //初始化怪物位置
         $('#play1').css({ 'left': ($('.stage').width() - $('#play1').width()) / 2 + "px", 'top': $('.stage').height() - $('#play1').height() });
@@ -96,8 +113,18 @@ $(document).ready(function () {
         timer = setInterval(timer_func, 1000 / 60);
         speedUp = setInterval(speedUp_func, 1000)
         //角色移動
-        $('body').off('click').on('click',left_click);
-        $('body').off('contextmenu').on('contextmenu',right_click);
+        // $('body').off('click').on('click',left_click);
+        // $('body').off('contextmenu').on('contextmenu',right_click);
+        $(document).off('keydown').keydown(function(e){
+            switch (e.key) {
+                case 'ArrowLeft':
+                    left_click()
+                    break;
+                case 'ArrowRight':
+                    right_click(e)
+                    break;
+            }
+        })
     }
     restart();
 
