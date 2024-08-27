@@ -36,16 +36,16 @@ $(document).ready(function () {
     $('body').contextmenu(right_click);
 
     //鍵盤事件
-    $(document).keydown(function(e){
-        switch (e.key) {
-            case 'ArrowLeft':
-                left_click()
-                break;
-            case 'ArrowRight':
-                right_click(e)
-                break;
-        }
-    })
+    // $(document).keydown(function(e){
+    //     switch (e.key) {
+    //         case 'ArrowLeft':
+    //             left_click()
+    //             break;
+    //         case 'ArrowRight':
+    //             right_click(e)
+    //             break;
+    //     }
+    // })
 
     //障礙物生成
     function createObstacle() {
@@ -113,18 +113,18 @@ $(document).ready(function () {
         timer = setInterval(timer_func, 1000 / 60);
         speedUp = setInterval(speedUp_func, 1000)
         //角色移動
-        // $('body').off('click').on('click',left_click);
-        // $('body').off('contextmenu').on('contextmenu',right_click);
-        $(document).off('keydown').keydown(function(e){
-            switch (e.key) {
-                case 'ArrowLeft':
-                    left_click()
-                    break;
-                case 'ArrowRight':
-                    right_click(e)
-                    break;
-            }
-        })
+        $('body').off('click').on('click',left_click);
+        $('body').off('contextmenu').on('contextmenu',right_click);
+        // $(document).off('keydown').keydown(function(e){
+        //     switch (e.key) {
+        //         case 'ArrowLeft':
+        //             left_click()
+        //             break;
+        //         case 'ArrowRight':
+        //             right_click(e)
+        //             break;
+        //     }
+        // })
     }
     restart();
 
